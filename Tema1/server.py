@@ -189,7 +189,7 @@ def start_server(protocol, chunk_size, ack):
         print("Wrong protocol")
 
 
-# start_server("TCP", 65000, STREAM_SERVER)
+start_server("TCP", 65000, STREAM_SERVER)
 # start_server("TCP", 65000, STOP_AND_WAIT_SERVER)
 # start_server("UDP", 65000, STREAM_SERVER)
-start_server("UDP", 65000, STOP_AND_WAIT_SERVER)
+# start_server("UDP", 65000, STOP_AND_WAIT_SERVER)

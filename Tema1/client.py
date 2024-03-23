@@ -113,8 +113,8 @@ def start_client(protocol, file_path, chunk_size, ack):
         udp_client.start()
 
 
-# start_client("TCP", "Curs1.pdf", 65000, STREAM_SERVER)
+start_client("TCP", "Curs1.pdf", 65000, STREAM_SERVER)
 # start_client("UDP", "Curs1.pdf", 1024, STREAM_SERVER)
 # start_client("UDP", "linuxmint-21.2-cinnamon-64bit.iso", 1024, STREAM_SERVER)
 # start_client("UDP", "Curs1.pdf", 1024, STOP_AND_WAIT_SERVER)
-start_client("UDP", "linuxmint-21.2-cinnamon-64bit.iso", 1024, STOP_AND_WAIT_SERVER)
+# start_client("UDP", "linuxmint-21.2-cinnamon-64bit.iso", 1024, STOP_AND_WAIT_SERVER)
