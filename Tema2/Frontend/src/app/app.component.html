@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col text-center">
+      <button class="btn btn-primary">Add Meme</button>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+
+    <div class="col col-md-4" *ngFor="let meme of memes">
+      <div class="card meme">
+        <img src={{meme.img}} class="card-img-top" alt="Meme Image" width="300" height="300">
+        <div class="card-body">
+          <p class="card-text">Description : {{meme.description}} </p>
+          <p class="card-text">Sentiment : {{meme.sentiment}} </p>
+        </div>
+      </div>
+    </div>
+</div>
