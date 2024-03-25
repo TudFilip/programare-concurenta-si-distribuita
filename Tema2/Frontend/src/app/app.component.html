@@ -1,7 +1,11 @@
 <div class="container">
   <div class="row mt-4">
     <div class="col text-center">
-      <button class="btn btn-primary">Add Meme</button>
+      <!-- <button class="btn btn-primary" (click) = "addMeme()">Add Meme</button> -->
+      <label for="file-upload" class="custom-file-upload">
+          <input id="file-upload" type="file" (change)="addMeme($event)">
+            Add meme
+      </label>
     </div>
   </div>
 

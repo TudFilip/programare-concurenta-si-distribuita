@@ -21,6 +21,20 @@ export class AppComponent implements OnInit{
     this.getMeme();
   }
 
+  addMeme(event: any) {
+    const file: File = event.target.files[0];
+    this.service.postMeme(file).subscribe(
+      (response) => {
+        console.log('Image uploaded successfully!', response);
+        this.memes = [];
+        this.getMeme();
+      },
+      (error) => {
+        console.error('Error uploading image:', error);
+      }
+    )
+  }
+
   getMeme() {
     this.service.getMeme().subscribe(data => {
       data.forEach(meme => {
