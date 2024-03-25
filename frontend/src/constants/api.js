@@ -1,0 +1,1 @@
+export const API_URL = 'https://backend-dot-cc-proiect-388020.lm.r.appspot.com/';
