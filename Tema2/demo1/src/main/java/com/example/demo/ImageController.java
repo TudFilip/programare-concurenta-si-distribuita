@@ -18,6 +18,7 @@ public class ImageController {
     private static final String GCP_ANALYZE_IMG  = "https://europe-central2-snappy-figure-417811.cloudfunctions.net/analyze_image";
     private static final String GCP_SENTIMENT = "https://europe-central2-snappy-figure-417811.cloudfunctions.net/rate_text";
     private static final String GCP_GET_IMAGE_BY_ID = "https://europe-central2-snappy-figure-417811.cloudfunctions.net/get_image_by_id";
+    private static final String GCP_GET_IMAGES = "https://us-central1-snappy-figure-417811.cloudfunctions.net/get_files";
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -90,6 +91,20 @@ public class ImageController {
                     HttpMethod.GET,
                     null,
                     Object.class
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
+        }
+    }
+
+    @GetMapping()
+    public ResponseEntity<String> getAllImages() {
+        try {
+            return restTemplate.exchange(
+                    GCP_GET_IMAGES,
+                    HttpMethod.GET,
+                    null,
+                    String.class
             );
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
