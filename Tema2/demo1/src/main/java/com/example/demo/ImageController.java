@@ -17,8 +17,8 @@ public class ImageController {
     private static final String GCP_ADD_IMAGE = "https://europe-central2-snappy-figure-417811.cloudfunctions.net/add_image";
     private static final String GCP_ANALYZE_IMG  = "https://europe-central2-snappy-figure-417811.cloudfunctions.net/analyze_image";
     private static final String GCP_SENTIMENT = "https://europe-central2-snappy-figure-417811.cloudfunctions.net/rate_text";
-    private static final String GCP_GET_IMAGE_BY_ID = "https://europe-central2-snappy-figure-417811.cloudfunctions.net/get_image_by_id";
     private static final String GCP_GET_IMAGES = "https://us-central1-snappy-figure-417811.cloudfunctions.net/get_files";
+    private static final String IMAGES_BUCKET = "https://storage.googleapis.com/imges_bucket/";
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -84,14 +84,18 @@ public class ImageController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getImage(@PathVariable String id) {
+    public ResponseEntity<?> getImage(@PathVariable String id) {
         try {
-            return restTemplate.exchange(
-                    GCP_GET_IMAGE_BY_ID + "?imageId=" + id,
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG); // Set appropriate content type
+
+            ResponseEntity<byte[]> response = restTemplate.exchange(
+                    IMAGES_BUCKET + id,
                     HttpMethod.GET,
-                    null,
-                    Object.class
+                    new HttpEntity<>(headers),
+                    byte[].class
             );
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(response.getBody());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
