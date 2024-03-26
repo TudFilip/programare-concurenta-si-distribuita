@@ -7,20 +7,20 @@ import { Meme } from './meme.model';
 import { ɵInternalFormsSharedModule } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MemeService {
-  private apiUrl = 'http://localhost:8081/api/memes/meme';
+  private apiUrl = 'http://localhost:8081/api/images';
 
   constructor(private http: HttpClient) {}
 
-  postMeme(file: File) : Observable<any> {
+  postMeme(file: File): Observable<any> {
     const formData: FormData = new FormData();
     formData.append('file', file, file.name);
     return this.http.post(this.apiUrl, formData);
   }
 
-  getMeme() : Observable<Meme[]> {
+  getMeme(): Observable<Meme[]> {
     return this.http.get<Meme[]>(this.apiUrl);
   }
 }

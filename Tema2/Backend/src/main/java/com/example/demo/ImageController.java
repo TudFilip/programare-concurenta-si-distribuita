@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Base64;
 
 @RestController
-@RequestMapping("/images")
+@RequestMapping("/api/images")
 public class ImageController {
 
     private static final String GCP_ADD_IMAGE = "https://europe-central2-snappy-figure-417811.cloudfunctions.net/add_image";
@@ -24,6 +24,7 @@ public class ImageController {
     @PostMapping()
     public ResponseEntity<String> saveImage(@RequestParam(value = "file", required = false) MultipartFile multipartFile) {
         try {
+            System.out.println("sunt aici");
             if (multipartFile.isEmpty()) {
                 return ResponseEntity.badRequest().body("File is empty");
             }
