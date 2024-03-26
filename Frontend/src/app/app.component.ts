@@ -11,13 +11,12 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'Frontend';
   memes: Meme[] = [];
 
   constructor(private service: MemeService, private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    this.getMeme();
+    this.getAllMemes();
   }
 
   addMeme(event: any) {
@@ -26,7 +25,7 @@ export class AppComponent implements OnInit {
       (response) => {
         console.log('Image uploaded successfully!', response);
         // this.memes = [];
-        this.getMeme();
+        // this.getMeme();
       },
       (error) => {
         console.error('Error uploading image:', error);
@@ -34,8 +33,8 @@ export class AppComponent implements OnInit {
     );
   }
 
-  getMeme() {
-    this.service.getMeme().subscribe((data) => {
+  getAllMemes() {
+    this.service.getAllMemes().subscribe((data) => {
       data.forEach((meme) => {
         meme.img = 'data:image/png;base64,' + meme.img;
         meme.description = meme.description;

@@ -20,7 +20,19 @@ export class MemeService {
     return this.http.post(this.apiUrl, formData);
   }
 
-  getMeme(): Observable<Meme[]> {
+  getAllMemes(): Observable<Meme[]> {
     return this.http.get<Meme[]>(this.apiUrl);
+  }
+
+  getMemeById(id: string): Observable<Meme> {
+    return this.http.get<Meme>(`${this.apiUrl}/${id}`);
+  }
+
+  getMemeContent(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/content/${id}`);
+  }
+
+  analyzeTextSentiment(memeText: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/analyze`, { message: memeText });
   }
 }
