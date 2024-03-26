@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
   constructor(private service: MemeService, private sanitizer: DomSanitizer){}
 
   ngOnInit(): void {
-    this.getMeme();
+    this.getMemes();
   }
 
   addMeme(event: any) {
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit{
       (response) => {
         console.log('Image uploaded successfully!', response);
         this.memes = [];
-        this.getMeme();
+        this.getMemes();
       },
       (error) => {
         console.error('Error uploading image:', error);
@@ -35,13 +35,51 @@ export class AppComponent implements OnInit{
     )
   }
 
+  createImageFromBlob(image: Blob, meme: Meme): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      meme.img = reader.result as string;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+
+  //Get all memes ids
+  //For each id get the meme
+  getMemes() {
+    this.service.getMemeIds().subscribe(ids => {
+      ids.forEach(id => {
+        this.service.getMemeById(id).subscribe(meme => {
+          this.service.getDescriptionById(id).subscribe(description => {
+            let newMeme: Meme = new Meme();
+            this.createImageFromBlob(meme, newMeme);
+            newMeme.description = JSON.parse(description).description.slice(',').join(', ');
+            newMeme.uuid = "1234";
+            this.memes.push(newMeme);
+            console.log(this.memes);
+          })
+          // let newMeme: Meme = new Meme();
+          // newMeme.img = "data:image/png;base64," + meme.img;
+          // newMeme.description = meme.description;
+          // newMeme.uuid = meme.uuid;
+          // //newMeme.sentiment = meme.sentiment;
+          // this.memes.push(newMeme);
+        })
+      })
+    })
+    
+  }
+
+  //Old function
   getMeme() {
     this.service.getMeme().subscribe(data => {
       data.forEach(meme => {
-        meme.img = "data:image/png;base64," + meme.img;
+        //meme.img = "data:image/png;base64," + meme.img;
         meme.description = meme.description; 
         meme.uuid = meme.uuid;
-        meme.sentiment = meme.sentiment;
+        // meme.sentiment = meme.sentiment;
         this.memes.push(meme);
       });
       console.log(this.memes);

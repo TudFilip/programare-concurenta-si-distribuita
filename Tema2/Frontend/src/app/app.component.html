@@ -4,7 +4,7 @@
       <!-- <button class="btn btn-primary" (click) = "addMeme()">Add Meme</button> -->
       <label for="file-upload" class="custom-file-upload">
           <input id="file-upload" type="file" (change)="addMeme($event)">
-            Add meme
+            Add image
       </label>
     </div>
   </div>
@@ -16,7 +16,7 @@
         <img src={{meme.img}} class="card-img-top" alt="Meme Image" width="300" height="300">
         <div class="card-body">
           <p class="card-text">Description : {{meme.description}} </p>
-          <p class="card-text">Sentiment : {{meme.sentiment}} </p>
+          <!-- <p class="card-text">Sentiment : {{meme.sentiment}} </p> -->
         </div>
       </div>
     </div>
