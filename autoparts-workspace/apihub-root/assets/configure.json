@@ -1,0 +1,22 @@
+{
+	"menu-items": [
+		{
+			"href": "retailer-wallet/loader/",
+			"background_color": "#8782E1",
+			"icon": "fa-solid fa-building-columns fa-4x",
+			"label": "Retailer Wallet"
+		},
+		{
+			"href": "client-wallet/loader/",
+			"background_color": "#6eda51",
+			"icon": "fa-solid fa-car fa-4x",
+			"label": "Client Wallet"
+		},
+		{
+			"href": "dsu-explorer",
+			"background_color": "#FAA368",
+			"icon": "fa-solid fa-atom fa-4x",
+			"label": "DSU Explorer"
+		}
+	]
+}
